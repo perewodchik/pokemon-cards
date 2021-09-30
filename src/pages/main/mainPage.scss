@@ -1,0 +1,29 @@
+.header {
+  height: 72px;
+  background: lightblue;
+}
+
+.content {
+  padding: 16px;
+  background: #FFF;
+}
+
+.sider {
+  background: lightblue;
+  padding: 8px;
+}
+
+.mainBar {
+  min-height: 512px;
+  padding: 0 8px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  background: #FFF;
+  //background: lightpink;
+}
+
+.footer {
+  //background: aliceblue;
+  background: #FFF;
+}

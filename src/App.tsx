@@ -3,6 +3,7 @@ import './App.css';
 import {LoginPage} from "./pages/login/LoginPage";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import 'antd/dist/antd.css';
+import MainPage from "./pages/main/MainPage";
 
 function App() {
   return (
@@ -12,8 +13,8 @@ function App() {
 				<Route exact path="/">
 					<LoginPage />
 				</Route>
-				<Route path="/news">
-					<LoginPage />
+				<Route path="/main">
+					<MainPage />
 				</Route>
 			</div>
 		</Router>
