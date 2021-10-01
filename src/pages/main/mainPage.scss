@@ -10,7 +10,7 @@
 
 .sider {
   background: lightblue;
-  padding: 8px;
+  box-sizing: border-box;
 }
 
 .mainBar {
@@ -20,10 +20,14 @@
   flex-direction: row;
   flex-wrap: wrap;
   background: #FFF;
-  //background: lightpink;
+  align-content: space-evenly;
 }
 
 .footer {
-  //background: aliceblue;
   background: #FFF;
+}
+
+.card {
+  width: 200px;
+  margin: 8px;
 }

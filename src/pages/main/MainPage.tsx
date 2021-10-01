@@ -1,11 +1,13 @@
 import React, {useEffect, useState} from 'react';
-import {Button, Form, Layout, Select} from 'antd';
+import {Button, Form, Layout, Select, Card} from 'antd';
 import {PokemonTCG} from 'pokemon-tcg-sdk-typescript'
+import {useHistory} from 'react-router-dom'
 import './mainPage.scss'
-import Card from 'components/card/Card'
+//import Card from 'components/card/Card'
 
 const {Header, Content, Footer, Sider} = Layout;
 const {Option} = Select
+const {Meta} = Card
 
 const MainPage: React.FC = () => {
 	const [form] = Form.useForm()
@@ -15,6 +17,8 @@ const MainPage: React.FC = () => {
 	const [rarities, setRarities] = useState([] as PokemonTCG.Rarity[])
 	const [subtypes, setSubtypes] = useState([] as PokemonTCG.Subtype[])
 	const [types, setTypes] = useState([] as PokemonTCG.Type[])
+
+	const history = useHistory()
 
 	useEffect(() => {
 		PokemonTCG.getAllSets()
@@ -38,19 +42,19 @@ const MainPage: React.FC = () => {
 
 	const makeQueryString = (params: any): string => {
 		let query = ''
-		if(params.set !== "")
+		if (params.set !== "")
 		{
 			query += `set.name:"${params.set}" `
 		}
-		if(params.rarity !== "")
+		if (params.rarity !== "")
 		{
 			query += `rarity:"${params.rarity}" `
 		}
-		if(params.types !== "")
+		if (params.types !== "")
 		{
 			query += `types:"${params.types}" `
 		}
-		if(params.subtypes !== "")
+		if (params.subtypes !== "")
 		{
 			query += `subtypes:"${params.subtypes}" `
 		}
@@ -79,11 +83,6 @@ const MainPage: React.FC = () => {
 
 		const totalCount = requestInfo.totalCount
 		const cards: PokemonTCG.Card[] = requestInfo.data
-
-		// const cards = await PokemonTCG.findCardsByQueries({
-		// 	q: queryString,
-		// 	pageSize: 5
-		// })
 
 		setCards(cards)
 
@@ -150,7 +149,20 @@ const MainPage: React.FC = () => {
 						</Form>
 					</Sider>
 					<Content className="mainBar">
-						{cards.map(c => <Card key={c.id} name={c.name} imageSrc={c.images.small} />)}
+
+						{cards.map(c =>
+								<Card
+									hoverable
+									className="card"
+									cover={<img alt={c.name} src={c.images.small} />}
+									onClick={() => history.push(`/info/${c.id}`)}
+								>
+									<Meta title={c.name} description={c.artist} />
+								</Card>
+
+							)
+
+						}
 					</Content>
 				</Layout>
 			</Content>
