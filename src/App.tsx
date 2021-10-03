@@ -1,10 +1,12 @@
 import React from 'react';
-import {LoginPage} from "pages/login/LoginPage";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import 'antd/dist/antd.css';
+import LoginPage from "pages/login/LoginPage";
+import ConfirmPage from "pages/confirm/ConfirmPage";
 import MainPage from "pages/main/MainPage";
 import InfoPage from "pages/info/InfoPage";
 import './App.scss'
+
 
 function App() {
   return (
@@ -13,6 +15,9 @@ function App() {
 			<div>
 				<Route exact path="/">
 					<LoginPage />
+				</Route>
+				<Route path="/confirm">
+					<ConfirmPage />
 				</Route>
 				<Route path="/main">
 					<MainPage />
