@@ -1,14 +1,35 @@
-import React from 'react'
-import { Form, Input, Button } from 'antd';
+import React, {useContext} from 'react'
+import { Form, Input, Button, notification } from 'antd';
+import { useHistory} from 'react-router-dom'
+import AuthContext from "context/AuthContext";
 import "./loginForm.scss"
 
 const LoginForm: React.FC = () => {
 	const [form] = Form.useForm();
+	const history = useHistory()
+	const {login} = useContext(AuthContext)
 
 	const handleSubmit = () => {
 		const email = form.getFieldValue('email')
 		const password = form.getFieldValue('password')
 		console.log(email, password)
+	}
+
+	const handleFinish = () => {
+		const email = form.getFieldValue('email')
+		const password = form.getFieldValue('password')
+		try
+		{
+			login(email, password)
+			history.push("/confirm")
+		} catch (e: any)
+		{
+			notification.error({
+				message: "Ошибка",
+				description: e.message,
+				placement: "topLeft"
+			})
+		}
 	}
 
 	return (
@@ -19,6 +40,7 @@ const LoginForm: React.FC = () => {
 				wrapperCol={{ span: 16 }}
 				initialValues={{ remember: true }}
 				autoComplete="off"
+				onFinish={handleFinish}
 				form={form}
 			>
 				<Form.Item

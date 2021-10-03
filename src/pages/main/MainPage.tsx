@@ -1,7 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import {Button, Form, Layout, Select, Card} from 'antd';
 import {PokemonTCG} from 'pokemon-tcg-sdk-typescript'
 import {useHistory} from 'react-router-dom'
+import AuthContext from "context/AuthContext";
 import './mainPage.scss'
 
 const {Header, Content, Footer, Sider} = Layout;
@@ -16,6 +17,8 @@ const MainPage: React.FC = () => {
 	const [rarities, setRarities] = useState([] as PokemonTCG.Rarity[])
 	const [subtypes, setSubtypes] = useState([] as PokemonTCG.Subtype[])
 	const [types, setTypes] = useState([] as PokemonTCG.Type[])
+
+	const {logout} = useContext(AuthContext)
 
 	const history = useHistory()
 
@@ -92,6 +95,7 @@ const MainPage: React.FC = () => {
 	return (
 		<Layout>
 			<Header className="header">
+				<Button type="ghost" onClick={logout}>Выйти</Button>
 			</Header>
 			<Content className="content" style={{padding: "16px 0 0 0"}}>
 				<Layout>
