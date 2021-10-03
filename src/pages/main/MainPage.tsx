@@ -3,7 +3,6 @@ import {Button, Form, Layout, Select, Card} from 'antd';
 import {PokemonTCG} from 'pokemon-tcg-sdk-typescript'
 import {useHistory} from 'react-router-dom'
 import './mainPage.scss'
-//import Card from 'components/card/Card'
 
 const {Header, Content, Footer, Sider} = Layout;
 const {Option} = Select
@@ -94,7 +93,7 @@ const MainPage: React.FC = () => {
 		<Layout>
 			<Header className="header">
 			</Header>
-			<Content className="content">
+			<Content className="content" style={{padding: "16px 0 0 0"}}>
 				<Layout>
 					<Sider width={256} className="sider" breakpoint="md" collapsedWidth={0} trigger={null}>
 						<Form

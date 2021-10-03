@@ -1,10 +1,10 @@
 import React from 'react';
-import './App.css';
 import {LoginPage} from "pages/login/LoginPage";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import 'antd/dist/antd.css';
 import MainPage from "pages/main/MainPage";
 import InfoPage from "pages/info/InfoPage";
+import './App.scss'
 
 function App() {
   return (
