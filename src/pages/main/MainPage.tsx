@@ -1,9 +1,12 @@
 import React, {useEffect, useState, useContext} from 'react';
 import {Button, Form, Layout, Select, Card, Pagination} from 'antd'
+// @ts-ignore
+import Animate from 'rc-animate'
 import {LogoutOutlined} from '@ant-design/icons'
 import {PokemonTCG} from 'pokemon-tcg-sdk-typescript'
 import {useHistory} from 'react-router-dom'
 import AuthContext from "context/AuthContext";
+import loading from 'images/card_loading.gif'
 import './mainPage.scss'
 
 const {Header, Content, Footer, Sider} = Layout;
@@ -87,7 +90,11 @@ const MainPage: React.FC = () => {
 		apiURL.searchParams.append("page", page.toString())
 
 		//Using fetch instead of PokemonTCG SDK for pagination
-		const requestInfo = await fetch(apiURL.toString()).then(res => res.json())
+		const requestInfo = await fetch(apiURL.toString(), {
+			headers: {
+				"X-Api-Key": "693e15a8-e939-447a-90ed-62e15d6758b4"
+			}
+		}).then(res => res.json(),)
 
 		const totalCount: number = requestInfo.totalCount
 		const cards: PokemonTCG.Card[] = requestInfo.data
@@ -97,10 +104,12 @@ const MainPage: React.FC = () => {
 	}
 
 	const handlePaginationChange = (paginationPage: number, paginationPageSize: number | undefined) => {
-		if (page !== paginationPage) {
+		if (page !== paginationPage)
+		{
 			setPage(paginationPage)
 		}
-		if (paginationPageSize && pageSize !== paginationPageSize) {
+		if (paginationPageSize && pageSize !== paginationPageSize)
+		{
 			setPageSize(paginationPageSize)
 		}
 	}
@@ -112,7 +121,7 @@ const MainPage: React.FC = () => {
 	return (
 		<Layout className="mainPage">
 			<Header className="header">
-				<LogoutOutlined onClick={logout} style={{fontSize: "32px"}} />
+				<LogoutOutlined onClick={logout} style={{fontSize: "32px"}}/>
 			</Header>
 			<Content className="content" style={{padding: "16px 0 0 0"}}>
 				<Layout>
@@ -170,27 +179,42 @@ const MainPage: React.FC = () => {
 						</Form>
 					</Sider>
 					<Content className="mainBar">
-						<div className="cardsContainer">
-							{cards.map(c =>
-								<Card
-									hoverable
-									className="card"
-									cover={<img alt={c.name} src={c.images.small}/>}
-									onClick={() => history.push(`/info/${c.id}`)}
-								>
-									<Meta title={c.name} description={c.artist}/>
-								</Card>
-							)
-							}
+						<div >
+							<Animate
+								className="cardsContainer"
+								transitionName="fade"
+								transitionAppear
+							>
+								{cards.map(c =>
+									<Card
+										hoverable
+										className="card"
+										cover={<>
+											<img src={loading} style={{borderRadius: "12px"}}/>
+											<img style={{display: "none"}}
+												 alt={c.name} src={c.images.small}
+												 onLoad={(e) => {
+													 e.currentTarget.previousSibling?.remove()
+													 e.currentTarget.style.display = "block"
+												}}
+											/>
+										</>}
+										onClick={() => history.push(`/info/${c.id}`)}
+										key={c.id}
+									>
+										<Meta title={c.name} description={c.artist}/>
+									</Card>
+								)}
+							</Animate>
 						</div>
 						{totalCards > 0 &&
-							<Pagination
-								total={totalCards}
-								showTotal={(total, range) => `${range[0]}-${range[1]} из ${total} карт`}
-								defaultPageSize={pageSize}
-								current={page}
-								onChange={handlePaginationChange}
-							/>
+						<Pagination
+							total={totalCards}
+							showTotal={(total, range) => `${range[0]}-${range[1]} из ${total} карт`}
+							defaultPageSize={pageSize}
+							current={page}
+							onChange={handlePaginationChange}
+						/>
 						}
 					</Content>
 				</Layout>

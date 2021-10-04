@@ -4,6 +4,7 @@ import {PokemonTCG} from 'pokemon-tcg-sdk-typescript'
 import {Layout, Typography, Descriptions, Divider} from "antd";
 import {LogoutOutlined, RollbackOutlined} from '@ant-design/icons'
 import './infoPage.scss'
+import loading from 'images/card_loading.gif'
 import AuthContext from "context/AuthContext";
 
 const {Text} = Typography
@@ -38,7 +39,19 @@ const InfoPage: React.FC = () => {
 				<Content className="content-wrapper">
 					<div className="left-side">
 						{pokemonInfo && <>
-							<img className="card-image" alt={pokemonInfo.name} src={pokemonInfo.images.large}/>
+							<img className="card-image"
+								 alt={pokemonInfo.name}
+								 src={loading}/>
+							<img className="card-image"
+								 alt={pokemonInfo.name}
+								 src={pokemonInfo.images.large}
+								 style={{display: "none"}}
+								 onLoad={(e) => {
+								 	e.currentTarget.previousSibling?.remove()
+									e.currentTarget.style.display="block"
+								 }}
+							/>
+
 							<div className="attacks-container">
 								{pokemonInfo.abilities && pokemonInfo.abilities?.map((a: PokemonTCG.Ability) =>
 									<Descriptions
