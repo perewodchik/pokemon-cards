@@ -1,22 +1,25 @@
-import React, {useEffect, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import {useParams, useHistory} from 'react-router-dom'
 import {PokemonTCG} from 'pokemon-tcg-sdk-typescript'
-import {Button, Layout, Typography, Descriptions, Divider} from "antd";
+import {Layout, Typography, Descriptions, Divider} from "antd";
+import {LogoutOutlined, RollbackOutlined} from '@ant-design/icons'
 import './infoPage.scss'
+import AuthContext from "context/AuthContext";
 
 const {Text} = Typography
 
-const {Header, Content, Footer, Sider} = Layout;
+const {Header, Content, Footer} = Layout;
 
 const InfoPage: React.FC = () => {
 	const {id}: any = useParams()
 	const history = useHistory()
+	const {logout} = useContext(AuthContext)
 	const [pokemonInfo, setPokemonInfo] = useState(undefined as unknown as PokemonTCG.Card)
 
 	useEffect(() => {
 		PokemonTCG.findCardByID(id)
 			.then(card => setPokemonInfo(card))
-	}, [])
+	}, [id])
 
 	const handleBackClick = () => {
 		history.goBack()
@@ -24,12 +27,13 @@ const InfoPage: React.FC = () => {
 
 	return (
 		<>
-			{id === undefined && <div>please provide id</div>}
+			{id === undefined && <div>please provide id</div> /*TODO: сделать страницу 404*/}
 			{id &&
-			<div>
-				<Layout style={{background: "#fff"}}>
+				<Layout className="infoPage">
 					<Header className="header">
-						<Button onClick={handleBackClick}>Назад</Button>
+						<RollbackOutlined onClick={handleBackClick} style={{fontSize: "32px"}}/>
+						<div style={{flexGrow: 1}}></div>
+						<LogoutOutlined onClick={logout} style={{fontSize: "32px"}} />
 					</Header>
 					<Content className="content-wrapper">
 						<div className="left-side">
@@ -93,8 +97,6 @@ const InfoPage: React.FC = () => {
 					</Content>
 					<Footer className="footer">Vlad Design 2021</Footer>
 				</Layout>
-
-			</div>
 			}
 		</>
 

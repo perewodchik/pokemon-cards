@@ -1,46 +1,60 @@
-.header {
-  background: lightblue;
-}
+.infoPage {
+  background: #FFFFFF;
 
-.content-wrapper {
-  margin-top: 16px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-
-  .left-side,
-  right-side {
+  .header {
+	height: 64px;
+	padding: 16px;
 	display: flex;
-	flex-direction: column;
+	background: #3399FF;
+	flex-direction: row;
+	flex-wrap: nowrap;
 	align-items: center;
   }
 
-  .left-side {
-	//background: cornflowerblue;
-	flex-grow: 2;
+  .content-wrapper {
+	margin-top: 16px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
 
-	.card-image {
-	  height: 384px;
+	.left-side,
+	.right-side {
+	  display: flex;
+	  flex-direction: column;
+	  align-items: center;
 	}
 
-	.attacks-container {
-	  margin-top: 16px;
-	  width: 100%;
-	  display: flex;
-	  flex-direction: row;
-	  flex-wrap: wrap;
-	  justify-content: space-evenly;
+	.left-side {
+	  //background: cornflowerblue;
+	  flex-grow: 2;
 
-	  .descriptions {
-		width: 384px;
+	  .card-image {
+		height: 384px;
 	  }
+
+	  .attacks-container {
+		margin-top: 16px;
+		width: 100%;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: space-evenly;
+
+		.descriptions {
+		  width: 384px;
+		}
+	  }
+	}
+
+	.right-side {
+	  max-width: 256px;
+	  flex-grow: 1;
 	}
   }
 
-  .right-side {
-	max-width: 256px;
-	//background: lightcoral;
-	flex-grow: 1;
+  .footer {
+	background: #FFF;
+	text-align: center;
   }
 }
 

@@ -44,6 +44,9 @@ function App()
 		if (value === "4242")
 		{
 			setOneTimePasswordReceived(true)
+			localStorage.setItem(storageName, JSON.stringify({
+				email, isAuthenticated: "true", oneTimePasswordReceived: "true"
+			}))
 		} else
 		{
 			throw Error("Введенный СМС-код не соответствует отправленному на номер телефона")

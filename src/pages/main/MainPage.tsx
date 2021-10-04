@@ -1,5 +1,6 @@
 import React, {useEffect, useState, useContext} from 'react';
-import {Button, Form, Layout, Select, Card} from 'antd';
+import {Button, Form, Layout, Select, Card, Pagination} from 'antd'
+import {LogoutOutlined} from '@ant-design/icons'
 import {PokemonTCG} from 'pokemon-tcg-sdk-typescript'
 import {useHistory} from 'react-router-dom'
 import AuthContext from "context/AuthContext";
@@ -12,6 +13,9 @@ const {Meta} = Card
 const MainPage: React.FC = () => {
 	const [form] = Form.useForm()
 	const [cards, setCards] = useState([] as PokemonTCG.Card[])
+	const [pageSize, setPageSize] = useState(10)
+	const [page, setPage] = useState(1)
+	const [totalCards, setTotalCards] = useState(0)
 
 	const [sets, setSets] = useState([] as PokemonTCG.Set[])
 	const [rarities, setRarities] = useState([] as PokemonTCG.Rarity[])
@@ -75,27 +79,38 @@ const MainPage: React.FC = () => {
 		}
 
 		const queryString = makeQueryString(params)
-		console.log(queryString)
 		const apiURL = new URL("https://api.pokemontcg.io/v2/cards")
 		apiURL.searchParams.append("q", queryString)
-		apiURL.searchParams.append("pageSize", "10")
+		apiURL.searchParams.append("pageSize", pageSize.toString())
+		apiURL.searchParams.append("page", page.toString())
 
 		//Using fetch instead of PokemonTCG SDK for pagination
 		const requestInfo = await fetch(apiURL.toString()).then(res => res.json())
 
-		const totalCount = requestInfo.totalCount
+		const totalCount: number = requestInfo.totalCount
 		const cards: PokemonTCG.Card[] = requestInfo.data
 
+		setTotalCards(totalCount)
 		setCards(cards)
-
-		console.log(cards)
-		console.log(totalCount)
 	}
 
+	const handlePaginationChange = (paginationPage: number, paginationPageSize: number | undefined) => {
+		if (page !== paginationPage) {
+			setPage(paginationPage)
+		}
+		if (paginationPageSize && pageSize !== paginationPageSize) {
+			setPageSize(paginationPageSize)
+		}
+	}
+
+	useEffect(() => {
+		handleFilterSubmit()
+	}, [page, pageSize])
+
 	return (
-		<Layout>
+		<Layout className="mainPage">
 			<Header className="header">
-				<Button type="ghost" onClick={logout}>Выйти</Button>
+				<LogoutOutlined onClick={logout} style={{fontSize: "32px"}} />
 			</Header>
 			<Content className="content" style={{padding: "16px 0 0 0"}}>
 				<Layout>
@@ -144,7 +159,7 @@ const MainPage: React.FC = () => {
 									{types.map(t => <Option value={t} key={t}>{t}</Option>)}
 								</Select>
 							</Form.Item>
-							<Form.Item wrapperCol={{offset: 4, span: 16}}>
+							<Form.Item wrapperCol={{offset: 6, span: 16}}>
 								<Button type="primary" htmlType="submit" onClick={handleFilterSubmit}>
 									Применить фильтр
 								</Button>
@@ -152,19 +167,27 @@ const MainPage: React.FC = () => {
 						</Form>
 					</Sider>
 					<Content className="mainBar">
-
-						{cards.map(c =>
+						<div className="cardsContainer">
+							{cards.map(c =>
 								<Card
 									hoverable
 									className="card"
-									cover={<img alt={c.name} src={c.images.small} />}
+									cover={<img alt={c.name} src={c.images.small}/>}
 									onClick={() => history.push(`/info/${c.id}`)}
 								>
-									<Meta title={c.name} description={c.artist} />
+									<Meta title={c.name} description={c.artist}/>
 								</Card>
-
 							)
-
+							}
+						</div>
+						{totalCards > 0 &&
+							<Pagination
+								total={totalCards}
+								showTotal={(total, range) => `${range[0]}-${range[1]} из ${total} карт`}
+								defaultPageSize={pageSize}
+								current={page}
+								onChange={handlePaginationChange}
+							/>
 						}
 					</Content>
 				</Layout>
