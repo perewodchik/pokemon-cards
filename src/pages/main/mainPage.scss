@@ -1,4 +1,6 @@
 .mainPage {
+  background: #FFFFFF;
+
   .header {
 	height: 64px;
 	padding: 16px;
@@ -22,7 +24,6 @@
 
   .mainBar {
 	min-height: 512px;
-	padding: 0 8px;
 	display: flex;
 	flex-direction: column;
 	flex-wrap: wrap;
@@ -34,6 +35,7 @@
 	  display: flex;
 	  flex-direction: row;
 	  flex-wrap: wrap;
+	  justify-content: space-evenly;
 	}
   }
 

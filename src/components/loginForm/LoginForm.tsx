@@ -9,12 +9,6 @@ const LoginForm: React.FC = () => {
 	const history = useHistory()
 	const {login} = useContext(AuthContext)
 
-	const handleSubmit = () => {
-		const email = form.getFieldValue('email')
-		const password = form.getFieldValue('password')
-		console.log(email, password)
-	}
-
 	const handleFinish = () => {
 		const email = form.getFieldValue('email')
 		const password = form.getFieldValue('password')
@@ -59,8 +53,8 @@ const LoginForm: React.FC = () => {
 					<Input.Password />
 				</Form.Item>
 
-				<Form.Item wrapperCol={{ offset: 3, span: 16 }}>
-					<Button type="primary" htmlType="submit" onClick={handleSubmit}>
+				<Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+					<Button type="primary" htmlType="submit">
 						Войти
 					</Button>
 				</Form.Item>

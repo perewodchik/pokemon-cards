@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react'
+import React, {useState, useContext, useEffect} from 'react'
 import {Form, Button, Input, Typography, notification} from 'antd'
 import AuthContext from "context/AuthContext";
 import './confirmPage.scss'
@@ -17,6 +17,10 @@ const ConfirmPage: React.FC = () => {
 		}
 	}
 
+	useEffect(() => {
+		console.log("СМС с кодом: 4242")
+	}, [])
+
 	const handleFinish = () => {
 		try
 		{
@@ -31,10 +35,6 @@ const ConfirmPage: React.FC = () => {
 		}
 	}
 
-	const handleFinishFailed = () => {
-		console.log("Finish failed")
-	}
-
 	return (
 		<div className="confirmPage">
 			<Form
@@ -42,13 +42,13 @@ const ConfirmPage: React.FC = () => {
 				labelCol={{ span: 5 }}
 				wrapperCol={{ span: 16 }}
 				onFinish={handleFinish}
-				onFinishFailed={handleFinishFailed}
 			>
 				<Form.Item>
 					<Text>Вам выслано смс с 4х-значным кодом. Введите в форму ниже</Text>
 				</Form.Item>
 				<Form.Item
 					label="СМС-код"
+					required={true}
 					rules={[
 						{len: 4},
 						{required: true},

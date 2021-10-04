@@ -29,18 +29,18 @@ const InfoPage: React.FC = () => {
 		<>
 			{id === undefined && <div>please provide id</div> /*TODO: сделать страницу 404*/}
 			{id &&
-				<Layout className="infoPage">
-					<Header className="header">
-						<RollbackOutlined onClick={handleBackClick} style={{fontSize: "32px"}}/>
-						<div style={{flexGrow: 1}}></div>
-						<LogoutOutlined onClick={logout} style={{fontSize: "32px"}} />
-					</Header>
-					<Content className="content-wrapper">
-						<div className="left-side">
-							{pokemonInfo &&
-							<img className="card-image" alt={pokemonInfo.name} src={pokemonInfo.images.large}/>}
+			<Layout className="infoPage">
+				<Header className="header">
+					<RollbackOutlined onClick={handleBackClick} style={{fontSize: "32px"}}/>
+					<div style={{flexGrow: 1}}></div>
+					<LogoutOutlined onClick={logout} style={{fontSize: "32px"}}/>
+				</Header>
+				<Content className="content-wrapper">
+					<div className="left-side">
+						{pokemonInfo && <>
+							<img className="card-image" alt={pokemonInfo.name} src={pokemonInfo.images.large}/>
 							<div className="attacks-container">
-								{pokemonInfo && pokemonInfo.abilities?.map((a: PokemonTCG.Ability) =>
+								{pokemonInfo.abilities && pokemonInfo.abilities?.map((a: PokemonTCG.Ability) =>
 									<Descriptions
 										title={a.name}
 										column={1}
@@ -50,7 +50,7 @@ const InfoPage: React.FC = () => {
 										<Descriptions.Item span={24} label="Описание">{a.text}</Descriptions.Item>
 									</Descriptions>
 								)}
-								{pokemonInfo && pokemonInfo.attacks?.map((a: PokemonTCG.Attack) =>
+								{pokemonInfo.attacks && pokemonInfo.attacks?.map((a: PokemonTCG.Attack) =>
 									<Descriptions
 										title={a.name}
 										column={2}
@@ -63,40 +63,39 @@ const InfoPage: React.FC = () => {
 								)
 								}
 							</div>
-						</div>
-						<div className="right-side">
-							{pokemonInfo &&
-							<>
-								<Descriptions column={1}>
-									<Descriptions.Item label="Имя покемона">{pokemonInfo.name}</Descriptions.Item>
-									<Descriptions.Item label="Типы">{pokemonInfo.types?.reduce(
-										(s: string, t: PokemonTCG.Type) => s + ", " + t.toString(), "").slice(1)}
-									</Descriptions.Item>
-									<Descriptions.Item label="Подтипы">{pokemonInfo.subtypes?.reduce(
-										(s: string, t: PokemonTCG.Subtype) => s + ", " + t.toString(), "").slice(1)}
-									</Descriptions.Item>
+						</>}
+					</div>
+					<div className="right-side">
+						{pokemonInfo && <>
+							<Descriptions column={1} title="Информация о покемоне">
+								<Descriptions.Item label="Имя покемона">{pokemonInfo.name}</Descriptions.Item>
+								<Descriptions.Item label="Типы">{pokemonInfo.types?.reduce(
+									(s: string, t: PokemonTCG.Type) => s + ", " + t.toString(), "").slice(1)}
+								</Descriptions.Item>
+								<Descriptions.Item label="Подтипы">{pokemonInfo.subtypes?.reduce(
+									(s: string, t: PokemonTCG.Subtype) => s + ", " + t.toString(), "").slice(1)}
+								</Descriptions.Item>
 
-								</Descriptions>
-								<Divider/>
-								<Descriptions column={1} title="Информация о карте">
-									<Descriptions.Item label="Сет">{pokemonInfo.set.name}</Descriptions.Item>
-									<Descriptions.Item label="Редкость">{pokemonInfo.rarity.toString()}</Descriptions.Item>
-									<Descriptions.Item label="Художник">{pokemonInfo.artist}</Descriptions.Item>
-								</Descriptions>
-								<Divider/>
-								<Descriptions column={1}>
-									<Text italic={true}>
-										{pokemonInfo.flavorText}
-									</Text>
+							</Descriptions>
+							<Divider/>
+							<Descriptions column={1} title="Информация о карте">
+								<Descriptions.Item label="Сет">{pokemonInfo.set.name}</Descriptions.Item>
+								<Descriptions.Item label="Редкость">{pokemonInfo.rarity.toString()}</Descriptions.Item>
+								<Descriptions.Item label="Художник">{pokemonInfo.artist}</Descriptions.Item>
+							</Descriptions>
+							<Divider/>
+							<Descriptions column={1}>
+								<Text italic={true}>
+									{pokemonInfo.flavorText}
+								</Text>
 
-								</Descriptions>
-							</>
-							}
+							</Descriptions>
+						</>}
 
-						</div>
-					</Content>
-					<Footer className="footer">Vlad Design 2021</Footer>
-				</Layout>
+					</div>
+				</Content>
+				<Footer className="footer">Vlad Design 2021</Footer>
+			</Layout>
 			}
 		</>
 

@@ -69,6 +69,8 @@ const MainPage: React.FC = () => {
 	}
 
 	const handleFilterSubmit = async () => {
+		setCards([])
+
 		const set = form.getFieldValue('set');
 		const rarity = form.getFieldValue('rarity')
 		const subtypes = form.getFieldValue('subtypes')
@@ -114,8 +116,9 @@ const MainPage: React.FC = () => {
 			</Header>
 			<Content className="content" style={{padding: "16px 0 0 0"}}>
 				<Layout>
-					<Sider width={256} className="sider" breakpoint="md" collapsedWidth={0} trigger={null}>
+					<Sider width={184} className="sider" breakpoint="md" collapsedWidth={0} zeroWidthTriggerStyle={{position: "absolute"}}>
 						<Form
+							className="siderForm"
 							form={form}
 							name="basic"
 							labelCol={{span: 8}}
@@ -159,7 +162,7 @@ const MainPage: React.FC = () => {
 									{types.map(t => <Option value={t} key={t}>{t}</Option>)}
 								</Select>
 							</Form.Item>
-							<Form.Item wrapperCol={{offset: 6, span: 16}}>
+							<Form.Item wrapperCol={{offset: 4, span: 16}}>
 								<Button type="primary" htmlType="submit" onClick={handleFilterSubmit}>
 									Применить фильтр
 								</Button>
