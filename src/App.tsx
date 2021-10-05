@@ -72,7 +72,7 @@ function App()
 				isAuthenticated,
 				oneTimePasswordReceived
 			}}>
-				<Router basename="/pokemon-cards">
+				<Router>
 					{isAuthenticated && oneTimePasswordReceived
 						?
 						<Switch>
