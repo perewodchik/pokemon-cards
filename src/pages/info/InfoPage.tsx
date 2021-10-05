@@ -46,9 +46,11 @@ const InfoPage: React.FC = () => {
 					<div className="left-side">
 						{pokemonInfo && <>
 							<img className="card-image"
+								 key="image-loading"
 								 alt={pokemonInfo.name}
 								 src={loading}/>
 							<img className="card-image"
+								 key="image-loaded"
 								 alt={pokemonInfo.name}
 								 src={pokemonInfo.images.large}
 								 style={{display: "none"}}
@@ -65,8 +67,8 @@ const InfoPage: React.FC = () => {
 										column={1}
 										className="descriptions"
 									>
-										<Descriptions.Item label="Тип">{a.type}</Descriptions.Item>
-										<Descriptions.Item span={24} label="Описание">{a.text}</Descriptions.Item>
+										<Descriptions.Item key={"ability-type-${a.name}"+a.name} label="Тип">{a.type}</Descriptions.Item>
+										<Descriptions.Item key={"ability-text"+a.name} span={24} label="Описание">{a.text}</Descriptions.Item>
 									</Descriptions>
 								)}
 								{pokemonInfo.attacks && pokemonInfo.attacks?.map((a: PokemonTCG.Attack) =>
@@ -75,9 +77,9 @@ const InfoPage: React.FC = () => {
 										column={2}
 										className="descriptions"
 									>
-										<Descriptions.Item label="Затраты энергии">{a.convertedEnergyCost}</Descriptions.Item>
-										<Descriptions.Item label="Урон">{a.damage}</Descriptions.Item>
-										<Descriptions.Item span={24} label="Описание">{a.text}</Descriptions.Item>
+										<Descriptions.Item key={"attack-energy"+a.name} label="Затраты энергии">{a.convertedEnergyCost}</Descriptions.Item>
+										<Descriptions.Item key={"attack-damage"+a.name} label="Урон">{a.damage}</Descriptions.Item>
+										<Descriptions.Item key={"attack-text"+a.name} span={24} label="Описание">{a.text}</Descriptions.Item>
 									</Descriptions>
 								)
 								}
@@ -87,20 +89,20 @@ const InfoPage: React.FC = () => {
 					<div className="right-side">
 						{pokemonInfo && <>
 							<Descriptions column={1} title="Информация о покемоне">
-								<Descriptions.Item label="Имя покемона">{pokemonInfo.name}</Descriptions.Item>
-								<Descriptions.Item label="Типы">{pokemonInfo.types?.reduce(
+								<Descriptions.Item key="pokemon-name" label="Имя покемона">{pokemonInfo.name}</Descriptions.Item>
+								<Descriptions.Item key="pokemon-types" label="Типы">{pokemonInfo.types?.reduce(
 									(s: string, t: PokemonTCG.Type) => s + ", " + t.toString(), "").slice(1)}
 								</Descriptions.Item>
-								<Descriptions.Item label="Подтипы">{pokemonInfo.subtypes?.reduce(
+								<Descriptions.Item key="pokemon-subtypes" label="Подтипы">{pokemonInfo.subtypes?.reduce(
 									(s: string, t: PokemonTCG.Subtype) => s + ", " + t.toString(), "").slice(1)}
 								</Descriptions.Item>
 
 							</Descriptions>
 							<Divider/>
 							<Descriptions column={1} title="Информация о карте">
-								<Descriptions.Item label="Сет">{pokemonInfo.set.name}</Descriptions.Item>
-								<Descriptions.Item label="Редкость">{pokemonInfo.rarity.toString()}</Descriptions.Item>
-								<Descriptions.Item label="Художник">{pokemonInfo.artist}</Descriptions.Item>
+								<Descriptions.Item key="set" label="Сет">{pokemonInfo.set.name}</Descriptions.Item>
+								<Descriptions.Item key="rarity" label="Редкость">{pokemonInfo.rarity.toString()}</Descriptions.Item>
+								<Descriptions.Item key="artist" label="Художник">{pokemonInfo.artist}</Descriptions.Item>
 							</Descriptions>
 							<Divider/>
 							<Descriptions column={1}>

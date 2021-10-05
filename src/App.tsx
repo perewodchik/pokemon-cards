@@ -76,10 +76,10 @@ function App()
 					{isAuthenticated && oneTimePasswordReceived
 						?
 						<Switch>
-							<Route path="/main">
+							<Route exact path="/main">
 								<MainPage/>
 							</Route>
-							<Route path="/info/:id?">
+							<Route exact path="/info/:id?">
 								<InfoPage/>
 							</Route>
 							<Redirect to="/main"/>
