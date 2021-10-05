@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {BrowserRouter as Router, Route, Switch, Redirect} from "react-router-dom";
+import {HashRouter as Router, Route, Switch, Redirect} from "react-router-dom";
 import 'antd/dist/antd.css';
 import LoginPage from "pages/login/LoginPage";
 import ConfirmPage from "pages/confirm/ConfirmPage";
