@@ -121,7 +121,7 @@ const MainPage: React.FC = () => {
 	return (
 		<Layout className="mainPage">
 			<Header className="header">
-				<LogoutOutlined onClick={logout} style={{fontSize: "32px"}}/>
+				<LogoutOutlined onClick={logout} className="icon"/>
 			</Header>
 			<Content className="content" style={{padding: "16px 0 0 0"}}>
 				<Layout>
@@ -139,7 +139,7 @@ const MainPage: React.FC = () => {
 								label="Set"
 								name="set"
 							>
-								<Select defaultValue={""}>
+								<Select defaultValue={""} showSearch>
 									<Option value="" key="set-any">Любой</Option>)
 									{sets.map(s => <Option value={s.name} key={s.name}>{s.name}</Option>)}
 								</Select>
@@ -148,7 +148,7 @@ const MainPage: React.FC = () => {
 								label="Rarity"
 								name="rarity"
 							>
-								<Select defaultValue={""}>
+								<Select defaultValue={""} showSearch>
 									<Option value="" key="rarity-any">Любой</Option>)
 									{rarities.map(r => <Option value={r} key={r}>{r}</Option>)}
 								</Select>
@@ -157,7 +157,7 @@ const MainPage: React.FC = () => {
 								label="Subtypes"
 								name="subtypes"
 							>
-								<Select defaultValue={""}>
+								<Select defaultValue={""} showSearch>
 									<Option value="" key="subtypes-any">Любой</Option>)
 									{subtypes.map(s => <Option value={s} key={s}>{s}</Option>)}
 								</Select>
@@ -166,7 +166,7 @@ const MainPage: React.FC = () => {
 								label="Types"
 								name="types"
 							>
-								<Select defaultValue={""}>
+								<Select defaultValue={""} showSearch>
 									<Option value="" key="types-any">Любой</Option>)
 									{types.map(t => <Option value={t} key={t}>{t}</Option>)}
 								</Select>

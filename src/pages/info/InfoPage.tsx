@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState} from 'react'
 import {useParams, useHistory} from 'react-router-dom'
 import {PokemonTCG} from 'pokemon-tcg-sdk-typescript'
-import {Layout, Typography, Descriptions, Divider} from "antd";
+import {Layout, Typography, Descriptions, Divider, Result, Button} from "antd";
 import {LogoutOutlined, RollbackOutlined} from '@ant-design/icons'
 import './infoPage.scss'
 import loading from 'images/card_loading.gif'
@@ -28,13 +28,19 @@ const InfoPage: React.FC = () => {
 
 	return (
 		<>
-			{id === undefined && <div>please provide id</div> /*TODO: сделать страницу 404*/}
+			{id === undefined &&
+					<Result
+						status="404"
+						title="404"
+						subTitle="Покемона с таким id не существует"
+						extra={<Button type="primary" onClick={() => history.push("../main")}>Вернуться на главную</Button>}/>
+			}
 			{id &&
 			<Layout className="infoPage">
 				<Header className="header">
-					<RollbackOutlined onClick={handleBackClick} style={{fontSize: "32px"}}/>
+					<RollbackOutlined onClick={handleBackClick} className="icon"/>
 					<div style={{flexGrow: 1}}></div>
-					<LogoutOutlined onClick={logout} style={{fontSize: "32px"}}/>
+					<LogoutOutlined onClick={logout} className="icon"/>
 				</Header>
 				<Content className="content-wrapper">
 					<div className="left-side">

@@ -9,6 +9,17 @@
 	flex-direction: row;
 	flex-wrap: nowrap;
 	align-items: center;
+
+	.icon {
+	  font-size: 32px;
+	  transition: 0.2s ease-out;
+	}
+
+	.icon:hover {
+	  font-size: 36px;
+	  color: white;
+	  transition: 0.2s ease-in;
+	}
   }
 
   .content-wrapper {
