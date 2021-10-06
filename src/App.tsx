@@ -17,6 +17,8 @@ function App()
 	const [oneTimePasswordReceived, setOneTimePasswordReceived] = useState(false)
 
 	const login = (email: string, password: string) => {
+		email = email.trim()
+		password = password.trim()
 		//should be server checked
 		if (email === "kode@kode.ru" && password === "Enk0deng")
 		{
