@@ -2,4 +2,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  background: #FAFAFA;
+  border-radius: 32px;
+  height: 100%;
+}
+
+.confirmForm {
+  border-radius: 16px;
+  padding: 16px;
+  box-sizing: border-box;
+  width: 324px;
+  background: #FAFAFA;
 }

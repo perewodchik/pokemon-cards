@@ -2,6 +2,7 @@ import React, {useState, useContext, useEffect} from 'react'
 import {Form, Button, Input, Typography, notification} from 'antd'
 import AuthContext from "context/AuthContext";
 import './confirmPage.scss'
+import pokemon_background from 'images/pokemon-background.jpg'
 
 const {Text} = Typography
 
@@ -36,11 +37,16 @@ const ConfirmPage: React.FC = () => {
 	}
 
 	return (
-		<div className="confirmPage">
+		<div style={{
+			background: `url(${pokemon_background})`,
+			backgroundRepeat: "no-repeat",
+			backgroundSize: "contain"
+		}} className="confirmPage">
 			<Form
+				className="confirmForm"
 				name="confirmForm"
-				labelCol={{ span: 5 }}
-				wrapperCol={{ span: 16 }}
+				labelCol={{ span: 8 }}
+				wrapperCol={{ span: 24 }}
 				onFinish={handleFinish}
 			>
 				<Form.Item>
@@ -57,7 +63,7 @@ const ConfirmPage: React.FC = () => {
 				>
 					<Input value={value} onChange={handleInputChange}/>
 				</Form.Item>
-				<Form.Item wrapperCol={{offset: 5}}>
+				<Form.Item wrapperCol={{offset: 5, span: 4}}>
 					<Button type="primary" htmlType="submit">Ввести</Button>
 				</Form.Item>
 			</Form>
