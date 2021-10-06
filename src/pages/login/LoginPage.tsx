@@ -8,7 +8,8 @@ const LoginPage: React.FC = () => {
 		<div style={{
 			background: `url(${pokemon_background})`,
 			backgroundRepeat: "no-repeat",
-			backgroundSize: "contain"
+			backgroundSize: "contain",
+			backgroundPosition: "bottom"
 		}} className="loginPage">
 			<LoginForm />
 		</div>

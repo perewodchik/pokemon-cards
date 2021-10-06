@@ -40,7 +40,8 @@ const ConfirmPage: React.FC = () => {
 		<div style={{
 			background: `url(${pokemon_background})`,
 			backgroundRepeat: "no-repeat",
-			backgroundSize: "contain"
+			backgroundSize: "contain",
+			backgroundPosition: "bottom"
 		}} className="confirmPage">
 			<Form
 				className="confirmForm"
