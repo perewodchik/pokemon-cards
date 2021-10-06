@@ -115,7 +115,7 @@ const InfoPage: React.FC = () => {
 
 					</div>
 				</Content>
-				<Footer className="footer">Vlad Design 2021</Footer>
+				<Footer className="footer">Design by perewodchik © 2021</Footer>
 			</Layout>
 			}
 		</>

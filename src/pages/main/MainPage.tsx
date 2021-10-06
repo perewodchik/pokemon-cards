@@ -219,7 +219,7 @@ const MainPage: React.FC = () => {
 					</Content>
 				</Layout>
 			</Content>
-			<Footer className="footer">Vlad Design 2021</Footer>
+			<Footer className="footer">Design by perewodchik © 2021 </Footer>
 		</Layout>
 	)
 }
