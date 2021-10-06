@@ -145,7 +145,7 @@ const MainPage: React.FC = () => {
 								</Select>
 							</Form.Item>
 							<Form.Item
-								label="Rarity"
+								label="Редкость"
 								name="rarity"
 							>
 								<Select defaultValue={""} showSearch>
@@ -154,7 +154,7 @@ const MainPage: React.FC = () => {
 								</Select>
 							</Form.Item>
 							<Form.Item
-								label="Subtypes"
+								label="Подтипы"
 								name="subtypes"
 							>
 								<Select defaultValue={""} showSearch>
@@ -163,7 +163,7 @@ const MainPage: React.FC = () => {
 								</Select>
 							</Form.Item>
 							<Form.Item
-								label="Types"
+								label="Типы"
 								name="types"
 							>
 								<Select defaultValue={""} showSearch>
